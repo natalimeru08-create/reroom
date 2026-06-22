@@ -2,6 +2,285 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #1b1b1b;
+  --text: #f7f7f7;
+  --black: #000;
+  --acid: #a6ff00;
+}
+
+html {
+  min-height: 100%;
+  background-color: var(--bg);
+}
+
 body {
-  background-color: #1b1b1b;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero__header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 33px 33px 0;
+}
+
+.hero__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 5.6vw, 78px);
+}
+
+.hero__nav a,
+.hero__logo,
+.hero__button {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero__nav a {
+  font-size: 16px;
+  line-height: 1.2;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.hero__nav a:hover,
+.hero__nav a:focus-visible {
+  opacity: 0.68;
+  transform: translateY(-1px);
+}
+
+.hero__logo {
+  font-size: 30px;
+  line-height: 0.85;
+  letter-spacing: -1.7px;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 8;
+  width: min(720px, calc(100vw - 48px));
+  margin: clamp(88px, 14vh, 121px) 0 0 clamp(24px, 10.1vw, 146px);
+}
+
+.hero__content h1 {
+  margin: 0;
+  font-size: clamp(42px, 4vw, 55px);
+  font-weight: 800;
+  line-height: 0.99;
+  letter-spacing: -1.9px;
+}
+
+.hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 307px;
+  min-height: 68px;
+  margin-top: 39px;
+  padding: 19px 36px;
+  border-radius: 999px;
+  background: var(--black);
+  font-size: 20px;
+  line-height: 1;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.hero__button:hover,
+.hero__button:focus-visible {
+  transform: translateY(-2px);
+  background-color: var(--acid);
+  color: var(--black);
+}
+
+.hero__animation {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.building {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 64vw;
+  height: 71vh;
+  min-width: 520px;
+  min-height: 430px;
+  background: var(--acid);
+  opacity: 0;
+  transform-origin: 50% 100%;
+  will-change: clip-path, opacity, transform;
+  animation: building-cycle 18s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.building--one {
+  clip-path: polygon(27% 33%, 84% 0, 100% 31%, 100% 100%, 0 100%);
+  transform: translate3d(-6%, 0, 0) rotate(-1deg) scale(1.08);
+}
+
+.building--two {
+  clip-path: polygon(30% 25%, 58% 8%, 100% 45%, 100% 100%, 0 100%);
+  transform: translate3d(-6%, 0, 0) scale(1.04);
+  animation-delay: 3s;
+}
+
+.building--three {
+  width: 44vw;
+  clip-path: polygon(0 20%, 54% 0, 100% 0, 100% 100%, 0 100%);
+  transform: translate3d(3%, 0, 0) scale(1.02);
+  animation-delay: 6s;
+}
+
+.building--four {
+  width: 75vw;
+  clip-path: polygon(0 67%, 79% 0, 100% 0, 100% 100%, 0 100%);
+  transform: translate3d(-38%, 0, 0) scale(1.03);
+  animation-delay: 9s;
+}
+
+.building--five {
+  width: 34vw;
+  height: 44vh;
+  min-width: 420px;
+  min-height: 320px;
+  clip-path: polygon(0 44%, 56% 0, 100% 27%, 100% 100%, 0 100%);
+  transform: translate3d(-72%, 0, 0);
+  animation-delay: 12s;
+}
+
+.building--six {
+  width: 69vw;
+  height: 61vh;
+  min-width: 680px;
+  min-height: 420px;
+  clip-path: polygon(0 58%, 42% 0, 100% 58%, 100% 100%, 0 100%);
+  transform: translate3d(-37%, 0, 0);
+  animation-delay: 15s;
+}
+
+.building__window {
+  position: absolute;
+  display: block;
+  background: var(--bg);
+  transform-origin: center;
+}
+
+.building--one .building__window {
+  top: 34%;
+  width: 8%;
+  height: 21%;
+  transform: skewY(-12deg);
+}
+
+.building--one .building__window--one {
+  left: 34%;
+}
+
+.building--one .building__window--two {
+  left: 51%;
+}
+
+.building--two .building__window {
+  left: 27%;
+  width: 7%;
+  height: 13%;
+  transform: skewY(-20deg) rotate(8deg);
+}
+
+.building--two .building__window--one {
+  top: 31%;
+}
+
+.building--two .building__window--two {
+  top: 43%;
+}
+
+.building--three .building__window {
+  left: 6%;
+  width: 10%;
+  height: 18%;
+  transform: skewY(-21deg);
+}
+
+.building--three .building__window--one {
+  top: 24%;
+}
+
+.building--three .building__window--two {
+  top: 45%;
+}
+
+.building--four .building__window {
+  width: 4.4%;
+  height: 18%;
+  transform: skewY(-23deg);
+}
+
+.building--four .building__window--one {
+  left: 5%;
+  top: 68%;
+}
+
+.building--four .building__window--two {
+  left: 74%;
+  top: 16%;
+}
+
+.building--five .building__window {
+  top: 16%;
+  width: 7.5%;
+  height: 27%;
+  transform: skewY(16deg);
+}
+
+.building--five .building__window--one {
+  left: 60%;
+}
+
+.building--five .building__window--two {
+  left: 70%;
+}
+
+.building--six .building__window {
+  top: 60%;
+  width: 6.6%;
+  height: 22%;
+}
+
+.building--six .building__window--one {
+  left: 28%;
+  transform: skewY(1deg);
+}
+
+.building--six .building__window--two {
+  left: 38%;
+  transform: skewY(1deg);
 }
