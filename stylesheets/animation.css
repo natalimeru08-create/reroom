@@ -1,0 +1,32 @@
+@keyframes building-cycle {
+  0%,
+  16% {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0 0;
+  }
+
+  23%,
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+    translate: -8vw 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .building--one {
+    opacity: 1;
+    filter: none;
+    translate: 0 0;
+  }
+}
